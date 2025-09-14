@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viraj Walunj - Resume</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .header p {
+            margin: 8px 0;
+            font-size: 1.1em;
+        }
+
+        .header a {
+            color: #fff;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-bottom 0.3s ease;
+        }
+
+        .header a:hover {
+            border-bottom: 1px solid #fff;
+        }
+
+        /* Profile Section */
+        .profile-section {
+            padding: 40px 30px;
+        }
+
+        .profile-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 40px;
+        }
+
+        .profile-table td {
+            padding: 20px;
+            vertical-align: top;
+        }
+
+        .profile-table img {
+            border-radius: 50%;
+            border: 5px solid #667eea;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .bio-text {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #555;
+            padding-left: 20px;
+        }
+
+        /* Section Styles */
+        section {
+            margin: 0 30px 40px 30px;
+            padding: 25px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        h2 {
+            font-size: 2em;
+            color: #667eea;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+        }
+
+        h3 {
+            color: #333;
+            font-size: 1.3em;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        /* Lists */
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        li::before {
+            content: '▸';
+            color: #667eea;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Work Experience Styling */
+        .work-item {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+
+        .work-item h3 {
+            color: #667eea;
+        }
+
+        .work-item p {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .skill-item {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Projects Styling */
+        .project-item {
+            background-color: #fff;
+            border: 1px solid #e9ecef;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .project-item:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .project-item h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .project-item a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .project-item a:hover {
+            text-decoration: underline;
+        }
+
+        /* FAQ Styling */
+        details {
+            margin-bottom: 15px;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #333;
+            transition: background-color 0.3s ease;
+        }
+
+        summary:hover {
+            background-color: #e9ecef;
+        }
+
+        details[open] summary {
+            background-color: #667eea;
+            color: white;
+        }
+
+        details p {
+            padding: 15px;
+            background-color: white;
+            margin: 0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 0;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .profile-table {
+                display: block;
+            }
+            
+            .profile-table td {
+                display: block;
+                text-align: center;
+            }
+            
+            .bio-text {
+                padding-left: 0;
+                margin-top: 20px;
+            }
+            
+            section {
+                margin: 0 20px 30px 20px;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Achievement badges */
+        .achievement-item {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 5px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 style="color: rgb(255, 224, 51); font-weight: bold; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Viraj Walunj</h1>
+            <p>Contact: <a href="mailto:virajwalunj96@gmail.com">virajwalunj96@gmail.com</a></p>
+            <p>LinkedIn: <a href="https://in.linkedin.com/in/viraj-walunj" target="_blank">https://in.linkedin.com/in/viraj-walunj</a></p>
+            <p>Github: <a href="https://github.com/Viraj-Walunj" target="_blank">https://github.com/Viraj-Walunj</a></p>
+        </div>
+
+        <div class="profile-section">
+            <table class="profile-table">
+                <tr>
+                    <td><img src="Viraj Walunj Profile Pic.png" alt="Viraj Walunj Pic" height="200px" width="200px"></td>
+                    <td class="bio-text">Hey there! I'm a 3rd-year B.Tech CSE Student at PCET's Pimpri Chinchwad University, Pune with a real passion for software engineering. I'm always eager to learn something new. When I'm not immersed in tech, you'll often find me with my nose in a book or sketching away to unwind. Let's connect and explore the exciting world of technology together! 🚀</td>
+                </tr>
+            </table>
+        </div>
+
+        <section>
+            <h2>Education</h2>
+            <ul>
+                <li>Bachelor of Technology in CSE, Pimpri Chinchwad University, Pune</li>
+                <li>Dr. D. Y. Patil Arts Commerce and Science Junior College Akurdi</li>
+                <li>Primary & Secondary, Mount Saint Ann Convent High School Talegaon Dabhade</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Work Experience</h2>
+            <div class="work-item">
+                <h3>Pimpri Chinchwad University - Student</h3>
+                <p>August 2023 - August 2027</p>
+                <ul>
+                    <li>Followed school and classroom policies, regulations, dress codes, and schedules.</li>
+                    <li>Collaborated on group projects to complete professional deliverables.</li>
+                    <li>Organized extracurricular activities to broaden students' exposure to new skills, experiences, and career paths.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-item">Time Organization</div>
+                <div class="skill-item">Presentation Development</div>
+                <div class="skill-item">Event Coordination</div>
+                <div class="skill-item">Punctuality</div>
+                <div class="skill-item">Multi-lingual (EN/HI/MR)</div>
+                <div class="skill-item">Software Utilization</div>
+                <div class="skill-item">Problem Solving</div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Achievements</h2>
+            <div>
+                <span class="achievement-item">Presentation Skills Excellence</span>
+                <span class="achievement-item">Student Coordinator - IDEATHON 2.0 (2025)</span>
+                <span class="achievement-item">Top 25 Finalist - JSPM Hackathon (Feb 2025)</span>
+                <span class="achievement-item">Poster Making - 2nd Prize</span>
+                <span class="achievement-item">Red Hat Linux Tools</span>
+                <span class="achievement-item">Creative Arts & Languages</span>
+            </div>
+        </section>
+
+        <section>
+            <h2>Projects</h2>
+            <div class="project-item">
+                <h3>Coursera-Full-Stack-Managing-Migration</h3>
+                <p><strong>Technologies:</strong> JavaScript, CSS, Python, HTML</p>
+                <p><strong>Github:</strong> <a href="https://github.com/Viraj-Walunj/Coursera-Full-Stack-Managing-Migration-Viraj-Walunj" target="_blank">View Project</a></p>
+            </div>
+            <div class="project-item">
+                <h3>JobInterviewSimulation</h3>
+                <p><strong>Technologies:</strong> HTML, CSS, JavaScript</p>
+                <p><strong>Github:</strong> <a href="https://github.com/Viraj-Walunj/JobInterviewSimulation" target="_blank">View Project</a></p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Frequently Asked Questions</h2>
+            <details>
+                <summary>What is Your Name?</summary>
+                <p>My name is Viraj Walunj, and I'm passionate about software engineering and technology.</p>
+            </details>
+
+            <details>
+                <summary>What is Your Age?</summary>
+                <p>I am 20 years old.</p>
+            </details>
+
+            <details>
+                <summary>What is Your Profession?</summary>
+                <p>I'm currently a Computer Science Engineering student and the Founder of Walunj Industries & Tech.</p>
+            </details>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 Viraj Walunj. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
