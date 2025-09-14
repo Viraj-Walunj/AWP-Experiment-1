@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Simple E-commerce</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet" />
+  <style>
+    body {
+      padding-top: 56px;
+    }
+    .product-card img {
+      height: 200px;
+      object-fit: fill;
+    }
+    .footer {
+      background: #22C1C3;
+      background: radial-gradient(circle, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
+      color: white;
+      text-align: center;
+      margin-top: 50px;
+      padding: 20px 0;
+    }
+    .navbar-brand {
+      background: #22C1C3;
+      background: radial-gradient(circle, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
+      border-radius: 10%;
+      padding: 8px 15px;
+    }
+    .section {
+      display: none;
+    }
+    .section.active {
+      display: block;
+    }
+    .cart-badge {
+      background: #dc3545;
+      color: white;
+      border-radius: 50%;
+      padding: 2px 6px;
+      font-size: 12px;
+      margin-left: 5px;
+    }
+    .product-detail-img {
+      height: 400px;
+      object-fit: cover;
+    }
+    .cart-item img {
+      height: 80px;
+      width: 80px;
+      object-fit: cover;
+    }
+    .contact-form {
+      background: #f8f9fa;
+      padding: 30px;
+      border-radius: 10px;
+    }
+    .contact-info {
+      background: linear-gradient(135deg, #22C1C3 0%, #fdbb2d 100%);
+      color: white;
+      padding: 30px;
+      border-radius: 10px;
+    }
+    .btn-gradient {
+      background: linear-gradient(135deg, #22C1C3 0%, #fdbb2d 100%);
+      border: none;
+      color: white;
+    }
+    .btn-gradient:hover {
+      background: linear-gradient(135deg, #1da1a3 0%, #e6a625 100%);
+      color: white;
+    }
+  </style>
+</head>
+<body>  
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#" onclick="showSection('home')">Shopify</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('home')">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('products')">Products</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="showSection('cart')">
+              Cart <span class="cart-badge" id="cartCount">0</span>
+            </a>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('contact')">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Home Section -->
+  <div id="home" class="section active">
+    <div class="container mt-5">
+      <div class="jumbotron bg-light p-5 rounded mb-5">
+        <h1 class="display-4">Welcome to Shopify</h1>
+        <p class="lead">Discover amazing products at unbeatable prices!</p>
+        <a class="btn btn-gradient btn-lg" href="#" onclick="showSection('products')">Shop Now</a>
+      </div>
+      
+      <h2 class="mb-4">Featured Products</h2>
+      <div class="row" id="featuredProducts">
+        <!-- Featured products will be loaded here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Products Section -->
+  <div id="products" class="section">
+    <div class="container mt-5">
+      <h1 class="mb-4">All Products</h1>
+      <div class="row" id="allProducts">
+        <!-- All products will be loaded here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart Section -->
+  <div id="cart" class="section">
+    <div class="container mt-5">
+      <h1 class="mb-4">Shopping Cart</h1>
+      <div id="cartItems">
+        <!-- Cart items will be loaded here -->
+      </div>
+      <div id="emptyCart" class="text-center" style="display: none;">
+        <h3>Your cart is empty</h3>
+        <p>Add some products to get started!</p>
+        <a href="#" class="btn btn-gradient" onclick="showSection('products')">Continue Shopping</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Section -->
+  <div id="contact" class="section">
+    <div class="container mt-5">
+      <h1 class="mb-5 text-center">Contact Us</h1>
+      <div class="row">
+        <div class="col-lg-6 mb-4">
+          <div class="contact-form">
+            <h3 class="mb-4">Get in Touch</h3>
+            <form id="contactForm">
+              <div class="mb-3">
+                <label for="name" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="name" required>
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" class="form-control" id="email" required>
+              </div>
+              <div class="mb-3">
+                <label for="phone" class="form-label">Phone Number</label>
+                <input type="tel" class="form-control" id="phone">
+              </div>
+              <div class="mb-3">
+                <label for="subject" class="form-label">Subject</label>
+                <input type="text" class="form-control" id="subject" required>
+              </div>
+              <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control" id="message" rows="5" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-gradient">Send Message</button>
+            </form>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="contact-info">
+            <h3 class="mb-4">Contact Information</h3>
+            <div class="mb-4">
+              <h5><i class="bi bi-geo-alt-fill"></i> Address</h5>
+              <p>123 Shopping Street<br>Commerce City, CC 12345<br>India</p>
+            </div>
+            <div class="mb-4">
+              <h5><i class="bi bi-telephone-fill"></i> Phone</h5>
+              <p>+91 98765 43210<br>+91 87654 32109</p>
+            </div>
+            <div class="mb-4">
+              <h5><i class="bi bi-envelope-fill"></i> Email</h5>
+              <p>info@shopify.com<br>support@shopify.com</p>
+            </div>
+            <div class="mb-4">
+              <h5><i class="bi bi-clock-fill"></i> Business Hours</h5>
+              <p>Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 10:00 AM - 4:00 PM<br>Sunday: Closed</p>
+            </div>
+            <div>
+              <h5><i class="bi bi-share-fill"></i> Follow Us</h5>
+              <p>
+                <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="text-white me-3"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="text-white"><i class="bi bi-linkedin"></i></a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <p>&copy; 2025 Shopify. All rights reserved.</p>
+        </div>
+        <div class="col-md-6 text-end">
+          <p>Made with ❤️ for amazing customers</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+    // Product data
+    const products = [
+      {
+        id: 1,
+        name: "Vitamin C Serum",
+        price: 600,
+        image: "VitaminC10_1200-1-min.avif",
+        description: "Premium vitamin C serum for glowing skin. Contains 10% vitamin C and hyaluronic acid.",
+        category: "Skincare"
+      },
+      {
+        id: 2,
+        name: "Hair Oil",
+        price: 800,
+        image: "51but1w39OL_540x.jpg",
+        description: "Natural hair oil blend for healthy and strong hair. Contains coconut and argan oil.",
+        category: "Hair Care"
+      },
+      {
+        id: 3,
+        name: "Face Cream",
+        price: 1599,
+        image: "GTI444587.avif",
+        description: "Anti-aging face cream with retinol and peptides for youthful skin.",
+        category: "Skincare"
+      },
+      {
+        id: 4,
+        name: "Cat Holder",
+        price: 256,
+        image: "11-Cat-holder.webp",
+        description: "Cute cat-shaped phone holder. Perfect for your desk or bedside table.",
+        category: "Accessories"
+      },
+      {
+        id: 5,
+        name: "Bluetooth Speaker",
+        price: 2999,
+        image: "61-ZYvldYL._SX679_.avif",
+        description: "Portable Bluetooth speaker with excellent sound quality and 12-hour battery life.",
+        category: "Electronics"
+      },
+      {
+        id: 6,
+        name: "Wireless Earbuds",
+        price: 399,
+        image: "55c1934c-0137-4e07-8a31-202eab054719.jpg",
+        description: "True wireless earbuds with noise cancellation and premium sound quality.",
+        category: "Electronics"
+      }
+    ];
+
+    let cart = [];
+
+    // Show specific section
+    function showSection(sectionName) {
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(section => section.classList.remove('active'));
+      document.getElementById(sectionName).classList.add('active');
+      
+      // Update navbar
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(link => link.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+
+    // Load products
+    function loadProducts() {
+      loadFeaturedProducts();
+      loadAllProducts();
+    }
+
+    function loadFeaturedProducts() {
+      const featuredProducts = products.slice(0, 3);
+      const container = document.getElementById('featuredProducts');
+      container.innerHTML = featuredProducts.map(product => `
+        <div class="col-md-4 mb-4">
+          <div class="card product-card">
+            <img src="${product.image}" class="card-img-top" alt="${product.name}" />
+            <div class="card-body">
+              <h5 class="card-title">${product.name}</h5>
+              <p class="card-text">₹${product.price}</p>
+              <button class="btn btn-primary" onclick="addToCart(${product.id})">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function loadAllProducts() {
+      const container = document.getElementById('allProducts');
+      container.innerHTML = products.map(product => `
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card product-card h-100">
+            <img src="${product.image}" class="card-img-top" alt="${product.name}" />
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">${product.name}</h5>
+              <p class="text-muted small">${product.category}</p>
+              <p class="card-text">${product.description}</p>
+              <div class="mt-auto">
+                <h6 class="text-primary">₹${product.price}</h6>
+                <button class="btn btn-gradient" onclick="addToCart(${product.id})">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Cart functions
+    function addToCart(productId) {
+      const product = products.find(p => p.id === productId);
+      const existingItem = cart.find(item => item.id === productId);
+      
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        cart.push({...product, quantity: 1});
+      }
+      
+      updateCartUI();
+      showNotification('Product added to cart!');
+    }
+
+    function removeFromCart(productId) {
+      cart = cart.filter(item => item.id !== productId);
+      updateCartUI();
+      showNotification('Product removed from cart!');
+    }
+
+    function updateQuantity(productId, newQuantity) {
+      if (newQuantity <= 0) {
+        removeFromCart(productId);
+        return;
+      }
+      
+      const item = cart.find(item => item.id === productId);
+      if (item) {
+        item.quantity = newQuantity;
+        updateCartUI();
+      }
+    }
+
+    function updateCartUI() {
+      const cartCount = document.getElementById('cartCount');
+      const cartItems = document.getElementById('cartItems');
+      const emptyCart = document.getElementById('emptyCart');
+      
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+      cartCount.textContent = totalItems;
+      
+      if (cart.length === 0) {
+        cartItems.style.display = 'none';
+        emptyCart.style.display = 'block';
+        return;
+      }
+      
+      cartItems.style.display = 'block';
+      emptyCart.style.display = 'none';
+      
+      const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      
+      cartItems.innerHTML = `
+        <div class="row">
+          <div class="col-lg-8">
+            ${cart.map(item => `
+              <div class="card mb-3">
+                <div class="row g-0 align-items-center">
+                  <div class="col-md-2">
+                    <img src="${item.image}" class="cart-item img-fluid rounded" alt="${item.name}">
+                  </div>
+                  <div class="col-md-4">
+                    <div class="card-body">
+                      <h6 class="card-title">${item.name}</h6>
+                      <p class="text-muted small">${item.category}</p>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <p class="fw-bold">₹${item.price}</p>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="input-group">
+                      <button class="btn btn-outline-secondary btn-sm" onclick="updateQuantity(${item.id}, ${item.quantity - 1})">-</button>
+                      <input type="text" class="form-control form-control-sm text-center" value="${item.quantity}" readonly>
+                      <button class="btn btn-outline-secondary btn-sm" onclick="updateQuantity(${item.id}, ${item.quantity + 1})">+</button>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <button class="btn btn-danger btn-sm" onclick="removeFromCart(${item.id})">
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+          <div class="col-lg-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Order Summary</h5>
+                <hr>
+                <div class="d-flex justify-content-between">
+                  <span>Subtotal:</span>
+                  <span>₹${totalAmount}</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <span>Shipping:</span>
+                  <span>₹100</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <span>Tax:</span>
+                  <span>₹${Math.round(totalAmount * 0.18)}</span>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-between fw-bold">
+                  <span>Total:</span>
+                  <span>₹${totalAmount + 100 + Math.round(totalAmount * 0.18)}</span>
+                </div>
+                <button class="btn btn-gradient w-100 mt-3">Proceed to Checkout</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Notification function
+    function showNotification(message) {
+      // Create toast notification
+      const toast = document.createElement('div');
+      toast.className = 'position-fixed bottom-0 end-0 p-3';
+      toast.style.zIndex = '1050';
+      toast.innerHTML = `
+        <div class="toast show" role="alert">
+          <div class="toast-header">
+            <strong class="me-auto">Shopify</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+          </div>
+          <div class="toast-body">
+            ${message}
+          </div>
+        </div>
+      `;
+      document.body.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.remove();
+      }, 3000);
+    }
+
+    // Contact form handler
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      showNotification('Thank you! Your message has been sent successfully.');
+      this.reset();
+    });
+
+    // Initialize the page
+    document.addEventListener('DOMContentLoaded', function() {
+      loadProducts();
+      updateCartUI();
+    });
+  </script>
+</body>
+</html>
